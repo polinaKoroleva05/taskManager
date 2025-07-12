@@ -1,20 +1,21 @@
 import { useContext } from "react"
-import { useParams } from "react-router"
-import { Context } from "../Context"
+import { useNavigate, useParams } from "react-router"
+import { TasksContext } from "../Context"
 import type { TaskInterface } from "../types"
-import { Button, Group, Paper, SegmentedControl, Text, TextInput } from "@mantine/core"
+import { Button, Group, SegmentedControl, TextInput } from "@mantine/core"
 import { useForm } from "@mantine/form"
 
 export default function TaskDetails() {
+    let navigate = useNavigate()
     let { id } = useParams()
-    const mapTasks: Map<number, TaskInterface> | null = useContext(Context)
-    let currentTask = Number(id) ? mapTasks?.get(Number(id)) : undefined
+    const { tasks, setTask }: { tasks: TaskInterface[],  setTask: ({id, task}:{id: number, task: TaskInterface}) => void } = useContext(TasksContext)
+    let currentTask = tasks.find(item=>item.id === Number(id))
     if (!currentTask) {
         return <p> Not Found :c </p>
     }
     function handleSubmit(values: typeof form.values){
-        mapTasks?.set(Number(id), values)
-        console.log(mapTasks)
+        setTask({id: Number(id), task: values})
+        navigate('/')
     }
 
     const form = useForm({
@@ -24,7 +25,8 @@ export default function TaskDetails() {
             description: currentTask.description,
             category: currentTask.category,
             status: currentTask.status,
-            priority: currentTask.priority
+            priority: currentTask.priority,
+            id: currentTask.id
         },
 
         validate: {

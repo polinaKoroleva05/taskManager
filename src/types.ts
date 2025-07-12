@@ -1,4 +1,5 @@
 export type TaskInfo = {
+    id: number,
     title: string;
     description?: string;
     category: Category;
@@ -11,6 +12,7 @@ type Status = 'To Do' | 'In Progress' | 'Done'
 type Priority = 'Low' | 'Medium' | 'High'
 
 export interface TaskInterface {
+    id: number,
     title: string;
     description?: string;
     category: Category;
