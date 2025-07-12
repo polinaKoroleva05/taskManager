@@ -23,7 +23,7 @@ export default function TaskItem({ id }: { id: number }) {
             {currentTask &&
                 <>
                     <Group justify="space-between">
-                        <Badge color="blue" size="lg">{currentTask.priority}</Badge>
+                        <Badge color="#e88b8bff" size="lg">{currentTask.priority}</Badge>
                         <Text fw={500}>
                             {currentTask.title}
                         </Text>
@@ -31,8 +31,8 @@ export default function TaskItem({ id }: { id: number }) {
                     </Group>
                     {currentTask.description && <Text> {currentTask.description}</Text>}
                     <Group>
-                        <Badge color="blue" size="lg">{currentTask.category}</Badge>
-                        <Badge color="blue" size="lg">{currentTask.status}</Badge>
+                        <Badge color="#a3e571ff" size="lg">{currentTask.category}</Badge>
+                        <Badge color="#97b0ffff" size="lg">{currentTask.status}</Badge>
                     </Group>
                 </>
             }
