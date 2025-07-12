@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from "react";
 import type { TaskInfo } from "./types";
 
-export const TasksContext = React.createContext<{ tasks: TaskInfo[], setTask: ({id, task}:{id: number, task: TaskInfo}) => void }>({ tasks: [], setTask: () => { } });
+export const TasksContext = React.createContext<{ tasks: TaskInfo[], setTask: ({ id, task }: { id: number, task: TaskInfo }) => void }>({ tasks: [], setTask: () => { } });
 
 export const useCreateTasksContext = function () {
 
@@ -31,9 +31,25 @@ export const useCreateTasksContext = function () {
             id: 4,
             title: 'Task4',
             description: 'Take some rest',
-            category: 'Feature',
+            category: 'Refactor',
             status: 'To Do',
             priority: 'Low'
+        },
+        {
+            id: 5,
+            title: 'Task5',
+            description: 'Do homework',
+            category: 'Test',
+            status: 'To Do',
+            priority: 'Medium'
+        },
+        {
+            id: 6,
+            title: ' Очень очень длинное название для задачи где нужно описать все все, чтобы ни у кого не осталось вопросов',
+            description: 'Супер подробное описание задачи, со всеми нужными технологиями, уточнениями, шутками-прибаутками, с заходом издалека, с благодарностями, пожеланиями, жалобами, воодушевлениями',
+            category: 'Test',
+            status: 'To Do',
+            priority: 'Medium'
         }]
 
     const [state, setState] = useState(tasks)
@@ -54,7 +70,7 @@ export const useCreateTasksContext = function () {
     };
 }
 
-export const TaskContextProvider = ({ children}: { children: React.ReactElement}) => {
+export const TaskContextProvider = ({ children }: { children: React.ReactElement }) => {
     const context = useCreateTasksContext();
     return <TasksContext.Provider value={context}>{children}</TasksContext.Provider>;
 }

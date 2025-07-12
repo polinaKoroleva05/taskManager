@@ -5,6 +5,9 @@ import './App.css'
 import { Route, Routes } from 'react-router'
 import TaskDetails from './components/TaskDetails'
 import { TaskContextProvider } from './Context'
+import MainPage from './components/MainPage'
+import '@mantine/core/styles.css';
+import '@mantine/carousel/styles.css';
 
 function App() {
 
@@ -12,7 +15,7 @@ function App() {
         <MantineProvider>
             <TaskContextProvider>
                 <Routes>
-                    <Route path='/' element={<TaskList />} />
+                    <Route path='/' element={<MainPage />} />
                     <Route path='/task/:id' element={<TaskDetails/>} />
                 </Routes>
             </TaskContextProvider>
