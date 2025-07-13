@@ -1,9 +1,7 @@
 import { Badge, Button, Group, Paper, Text, Title } from "@mantine/core"
 import type { TaskInterface } from "../types"
 import styles from '../css/taskItem.module.css'
-import LowPriorityIcon from '../assets/low.svg?react'
-import MediumPriorityIcon from '../assets/medium.svg?react'
-import HighPriorityIcon from '../assets/high.svg?react'
+import EditIcon from '../assets/edit.svg?react'
 import { useContext } from "react"
 import { TasksContext } from "../Context"
 import { useNavigate } from "react-router"
@@ -38,13 +36,13 @@ export default function TaskItem({ id }: { id: number }) {
                 <>
                     <Group justify="space-between">
                         <Badge variant="light" color={PriorityMap[currentTask.priority]} size='sm'>{currentTask.priority}</Badge>
-                        <Button variant="transparent" radius="md" onClick={() => navigate(`task/${id}`)}><HighPriorityIcon className={styles.icon} /></Button>
+                        <Button variant='default' color='#8c8c8cff' size='xs' radius="sm" onClick={() => navigate(`task/${id}`)}><EditIcon className={styles.icon}/>Edit</Button>
                     </Group>
                         <Title ta="left" order={5}>
                             {currentTask.title}
                         </Title >
                     {currentTask.description && <Text ta="left"> {currentTask.description}</Text>}
-                    <Group>
+                    <Group style={{'padding-top': '1vw'}}>
                         <Badge variant="dot"  radius='sm' color={StatusMap[currentTask.status]} size="sm">{currentTask.status}</Badge>
                         <Badge radius='sm' variant="gradient"
                             gradient={CategoryMap[currentTask.category]} size="sm">{currentTask.category}</Badge>

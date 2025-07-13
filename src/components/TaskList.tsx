@@ -3,7 +3,6 @@ import type { TaskInterface } from "../types"
 import { Flex, Paper, Title } from "@mantine/core"
 import { useContext } from "react"
 import { TasksContext } from "../Context"
-import styles from '../css/taskList.module.css'
 
 export default function TaskList({ style, title, tasks }: { style?: {}, title: string, tasks: TaskInterface[]}) {
     return (
