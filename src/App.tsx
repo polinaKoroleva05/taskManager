@@ -1,4 +1,3 @@
-import TaskList from './components/TaskList'
 import '@mantine/core/styles.css'
 import { MantineProvider } from '@mantine/core'
 import './App.css'

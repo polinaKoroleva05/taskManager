@@ -1,0 +1,13 @@
+.searchField{
+    background-color: #eeeeee;
+    margin-bottom: 1vh;
+    padding: 1vh;
+    border-radius: 5px;
+}
+
+.categoryField{
+    width: 591px;
+}
+.priorityField{
+    width: 591px;
+}
