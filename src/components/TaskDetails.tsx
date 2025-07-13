@@ -2,8 +2,9 @@ import { useContext } from "react"
 import { useNavigate, useParams } from "react-router"
 import { TasksContext } from "../Context"
 import type { TaskInterface } from "../types"
-import { Button, Group, SegmentedControl, Textarea, TextInput } from "@mantine/core"
+import { Button, Group, SegmentedControl, Textarea, Text, TextInput, Paper } from "@mantine/core"
 import { useForm } from "@mantine/form"
+import styles from '../css/taskDetails.module.css'
 
 export default function TaskDetails() {
     let navigate = useNavigate()
@@ -34,56 +35,71 @@ export default function TaskDetails() {
         },
     });
     return (
-        <form onSubmit={form.onSubmit(handleSubmit)}>
-            <TextInput
-                withAsterisk
-                label="Заголовок"
-                key={form.key('title')}
-                {...form.getInputProps('title')}
-            />
-            <Textarea
-                label="Описание"
-                key={form.key('description')}
-                {...form.getInputProps('description')}
-                autosize
-                minRows={2}
-            />
-            <SegmentedControl
-                fullWidth
-                key={form.key('category')}
-                {...form.getInputProps('category')}
-                data={[
-                    { label: 'Bug', value: 'Bug' },
-                    { label: 'Feature', value: 'Feature' },
-                    { label: 'Documentation', value: 'Documentation' },
-                    { label: 'Refactor', value: 'Refactor' },
-                    { label: 'Test', value: 'Test' }
-                ]}
-            />
-            <SegmentedControl
-                fullWidth
-                key={form.key('status')}
-                {...form.getInputProps('status')}
-                data={[
-                    { label: 'To Do', value: 'To Do' },
-                    { label: 'In Progress', value: 'In Progress' },
-                    { label: 'Done', value: 'Done' }
-                ]}
-            />
-            <SegmentedControl
-                fullWidth
-                key={form.key('priority')}
-                {...form.getInputProps('priority')}
-                data={[
-                    { label: 'Low', value: 'Low' },
-                    { label: 'Medium', value: 'Medium' },
-                    { label: 'High', value: 'High' }
-                ]}
-            />
+        <Paper className={styles.form} shadow='md' radius='md'>
 
-            <Group justify="flex-end" mt="md">
-                <Button type="submit">Submit</Button>
-            </Group>
-        </form>
+            <form onSubmit={form.onSubmit(handleSubmit)}>
+                <TextInput 
+                    withAsterisk
+                    label="Title"
+                    key={form.key('title')}
+                    {...form.getInputProps('title')}
+                />
+                <Textarea
+                    label="Description"
+                    
+                    key={form.key('description')}
+                    {...form.getInputProps('description')}
+                    
+                    rows={11}
+
+                />
+                <Text fz='sm' fw={500} ta="left">
+                    Category
+                </Text>
+                <SegmentedControl
+                    fullWidth
+                    key={form.key('category')}
+                    {...form.getInputProps('category')}
+                    data={[
+                        { label: 'Bug', value: 'Bug' },
+                        { label: 'Feature', value: 'Feature' },
+                        { label: 'Documentation', value: 'Documentation' },
+                        { label: 'Refactor', value: 'Refactor' },
+                        { label: 'Test', value: 'Test' }
+                    ]}
+                />
+                <Text fz='sm' fw={500} ta="left">
+                    Status
+                </Text>
+                <SegmentedControl
+                    fullWidth
+                    key={form.key('status')}
+                    {...form.getInputProps('status')}
+                    data={[
+                        { label: 'To Do', value: 'To Do' },
+                        { label: 'In Progress', value: 'In Progress' },
+                        { label: 'Done', value: 'Done' }
+                    ]}
+                />
+                <Text fz='sm' fw={500} ta="left">
+                    Priority
+                </Text>
+                <SegmentedControl
+                    fullWidth
+                    key={form.key('priority')}
+                    {...form.getInputProps('priority')}
+                    data={[
+                        { label: 'Low', value: 'Low' },
+                        { label: 'Medium', value: 'Medium' },
+                        { label: 'High', value: 'High' }
+                    ]}
+                />
+
+                <Group justify="flex-end" mt="md">
+                    <Button color='#80b654ff' type="submit">Save</Button>
+                    <Button color='#a6a6a6ff' onClick={() => navigate('/')}>Cancel</Button>
+                </Group>
+            </form>
+        </Paper>
     )
 }

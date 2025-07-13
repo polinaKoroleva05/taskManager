@@ -5,6 +5,7 @@ import type { TaskInterface } from '../types';
 import TaskList from './TaskList';
 import { Carousel } from '@mantine/carousel';
 import styles from '../css/mainPage.module.css'
+import SearchIcon from '../assets/search.svg?react'
 
 export default function MainPage() {
     const { tasks }: { tasks: TaskInterface[] } = useContext(TasksContext)
@@ -29,10 +30,11 @@ export default function MainPage() {
                 value={searchWord}
                 onChange={(event) => setSearchWord(event.currentTarget.value)}
                 rightSection={searchWord !== '' ? <Input.ClearButton onClick={() => setSearchWord('')} /> : undefined}
+                leftSection={<SearchIcon className={styles.searchIcon}/>}
             />
             <Group>
-                <TagsInput className={styles.categoryField} value={searchCategory} onChange={setSearchCategory} placeholder='Choose category' data={['Bug', 'Feature', 'Documentation', 'Refactor', 'Test']} clearable />
-                <TagsInput className={styles.priorityField} value={searchPriority} onChange={setSearchPriority} placeholder='Choose priority' data={['Low', 'Medium', 'High']} clearable />
+                <TagsInput className={styles.categoryField} ta="left" label='Category' value={searchCategory} onChange={setSearchCategory} placeholder='Choose category' data={['Bug', 'Feature', 'Documentation', 'Refactor', 'Test']} clearable />
+                <TagsInput className={styles.priorityField} ta="left" label='Priority' value={searchPriority} onChange={setSearchPriority} placeholder='Choose priority' data={['Low', 'Medium', 'High']} clearable />
             </Group>
         </Stack>
         <Flex visibleFrom='sm'
