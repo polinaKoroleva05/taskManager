@@ -1,8 +1,9 @@
 ## Менеджер задач
 
 Веб-приложение "Менеджер задач", позволяющее просматривать список задач и редактировать их. 
-
-Для ознакомленияс проект доступен по ссылке:
+![Главная страница](https://github.com/polinaKoroleva05/taskManager/blob/main/public/mainPage.png)
+![Страница редактирования задачи](https://github.com/polinaKoroleva05/taskManager/blob/main/public/editPage.png)
+Для ознакомления проект доступен по ссылке:
 [https://polinakoroleva05.github.io/taskManager/](https://polinakoroleva05.github.io/taskManager/)
 
 Установка для дальнейшей разработки:
@@ -13,7 +14,7 @@
 
 3. Запустите команду
 
-`npm runn dev`
+`npm run dev`
 
 Установка для использования на сервере:
 1. Скачайте папку dist
