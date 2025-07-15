@@ -4,7 +4,7 @@
 ![Главная страница](https://github.com/polinaKoroleva05/taskManager/blob/main/public/mainPage.png)
 ![Страница редактирования задачи](https://github.com/polinaKoroleva05/taskManager/blob/main/public/editPage.png)
 Для ознакомления проект доступен по ссылке:
-[https://polinakoroleva05.github.io/taskManager/](https://polinakoroleva05.github.io/taskManager/)
+[https://task-manager-peach-rho.vercel.app/](https://task-manager-peach-rho.vercel.app/)
 
 <ins>Установка для дальнейшей разработки:</ins>
 1. Склонируйте репозиторий 
@@ -22,4 +22,5 @@
 -  UI-фреймворк: Mantine
 -  Инструменты стилизации: css modules
 -  Плагин для работы с svg: vite-plugin-svgr
+-  localStorage для хранения данных между сессиями
 
