@@ -1,11 +1,11 @@
 import { Flex, Group, Input, Stack, TagsInput } from '@mantine/core';
 import { useContext, useState } from 'react'
-import { TasksContext } from '../Context'
-import type { TaskInterface } from '../types';
-import TaskList from './TaskList';
+import { TasksContext } from '@store/Context'
+import type { TaskInterface } from '@shared/model/types';
+import TaskList from '@widgets/taskList/TaskList';
 import { Carousel } from '@mantine/carousel';
-import styles from '../css/mainPage.module.css'
-import SearchIcon from '../assets/search.svg?react'
+import styles from './mainPage.module.css'
+import SearchIcon from '@shared/ui/search.svg?react'
 
 export default function MainPage() {
     const { tasks }: { tasks: TaskInterface[] } = useContext(TasksContext)

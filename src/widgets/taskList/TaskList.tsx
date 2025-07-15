@@ -1,5 +1,5 @@
-import TaskItem from "./TaskItem"
-import type { TaskInterface } from "../types"
+import TaskItem from "@widgets/taskItem/TaskItem"
+import type { TaskInterface } from "@shared/model/types"
 import { Flex, Paper, Title } from "@mantine/core"
 
 export default function TaskList({ style, title, tasks }: { style?: {}, title: string, tasks: TaskInterface[]}) {

@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from "react";
-import type { TaskInfo } from "./types";
+import type { TaskInfo } from "@shared/model/types";
 
 export const TasksContext = React.createContext<{ tasks: TaskInfo[], setTask: ({ id, task }: { id: number, task: TaskInfo }) => void }>({ tasks: [], setTask: () => { } });
 

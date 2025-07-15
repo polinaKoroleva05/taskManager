@@ -1,10 +1,10 @@
 import { useContext } from "react"
 import { useNavigate, useParams } from "react-router"
-import { TasksContext } from "../Context"
-import type { TaskInterface } from "../types"
+import { TasksContext } from "@store/Context"
+import type { TaskInterface } from "@shared/model/types"
 import { Button, Group, SegmentedControl, Textarea, Text, TextInput, Paper } from "@mantine/core"
 import { useForm } from "@mantine/form"
-import styles from '../css/taskDetails.module.css'
+import styles from './taskDetails.module.css'
 
 export default function TaskDetails() {
     let navigate = useNavigate()

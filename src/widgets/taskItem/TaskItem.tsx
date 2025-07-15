@@ -1,9 +1,9 @@
 import { Badge, Button, Group, Paper, Text, Title } from "@mantine/core"
-import type { TaskInterface } from "../types"
-import styles from '../css/taskItem.module.css'
-import EditIcon from '../assets/edit.svg?react'
+import type { TaskInterface } from "@shared/model/types"
+import styles from './taskItem.module.css'
+import EditIcon from '@shared/ui/edit.svg?react'
 import { useContext } from "react"
-import { TasksContext } from "../Context"
+import { TasksContext } from "@store/Context"
 import { useNavigate } from "react-router"
 
 const PriorityMap = {

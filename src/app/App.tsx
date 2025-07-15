@@ -2,9 +2,9 @@ import '@mantine/core/styles.css'
 import { MantineProvider } from '@mantine/core'
 import './App.css'
 import { Route, Routes } from 'react-router'
-import TaskDetails from './components/TaskDetails'
-import { TaskContextProvider } from './Context'
-import MainPage from './components/MainPage'
+import TaskDetails from '../widgets/taskDetails/TaskDetails'
+import { TaskContextProvider } from '@store/Context'
+import MainPage from '@pages/mainPage/MainPage'
 import '@mantine/core/styles.css';
 import '@mantine/carousel/styles.css';
 
