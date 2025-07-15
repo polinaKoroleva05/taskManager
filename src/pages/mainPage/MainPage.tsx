@@ -20,9 +20,9 @@ export default function MainPage() {
     if (searchPriority?.length) {
         searchFilteredTasks = searchFilteredTasks.filter(task => searchPriority.includes(task.priority))
     }
-    let tasksToDo = searchFilteredTasks.filter(task => task.status === 'To Do')
-    let tasksInProgress = searchFilteredTasks.filter(task => task.status === 'In Progress')
-    let tasksDone = searchFilteredTasks.filter(task => task.status === 'Done')
+    const tasksToDo = searchFilteredTasks.filter(task => task.status === 'To Do')
+    const tasksInProgress = searchFilteredTasks.filter(task => task.status === 'In Progress')
+    const tasksDone = searchFilteredTasks.filter(task => task.status === 'Done')
     return (<>
         <Stack className={styles.searchField}>
             <Input
