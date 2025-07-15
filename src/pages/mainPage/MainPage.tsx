@@ -199,7 +199,7 @@ export default observer(function MainPage() {
                 hiddenFrom='xs'
                 withIndicators
                 withControls
-                slideSize='70%'
+                slideSize='80%'
                 slideGap='sm'
                 emblaOptions={{
                     loop: true
