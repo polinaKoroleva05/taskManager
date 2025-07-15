@@ -13,6 +13,13 @@ import styles from './taskDetails.module.css';
 import {observer} from 'mobx-react-lite';
 import { format } from 'date-fns';
 
+/**
+     * A functional React component that displays form filled with task data, allows you to edit fields.
+     * @param {TaskInterface} currentTask - The task whose data needs to be displayed.
+     * @param {(taskData: TaskInterface) => void} onSubmitProp - Action to be called when the submit button is pressed.
+     * @param {() => void} onCancelProp - Action to be called when the cancel button is pressed.
+     * @returns {React.Element} A React element displaying the form of task details.
+     */
 export default observer(function TaskDetails({
     currentTask,
     onSubmitProp,
