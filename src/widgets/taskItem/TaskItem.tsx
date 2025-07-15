@@ -6,6 +6,7 @@ import {useNavigate} from 'react-router';
 import {observer} from 'mobx-react-lite';
 import {useTaskStore} from '@/app/taskStore';
 import DeleteIcon from '@shared/ui/delete.svg?react'
+import { format } from "date-fns";
 
 const PriorityMap = {
     Low: '#8bade8ff',
@@ -37,6 +38,7 @@ export default observer(function TaskItem({item}: {item: TaskInterface}) {
         event.stopPropagation();
         Taskstore.deleteTask(item.id!);
     }
+    const dateString = format(new Date(item.date!), "dd MMM yyyy HH:mm")
     return (
         <Paper
             shadow='sm'
@@ -46,6 +48,7 @@ export default observer(function TaskItem({item}: {item: TaskInterface}) {
         >
             {item && (
                 <>
+                <Text className={styles.dateText} ta='left'>{dateString} </Text>
                     <Group justify='space-between'>
                         <Badge
                             variant='light'

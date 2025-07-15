@@ -10,7 +10,7 @@ export const createTaskStore = function () {
             category: 'Bug',
             status: 'Done',
             priority: 'Low',
-            date: new Date().toDateString()
+            date: 1052005936342
         },
         {
             id: 2,
@@ -18,7 +18,7 @@ export const createTaskStore = function () {
             category: 'Documentation',
             status: 'In Progress',
             priority: 'High',
-            date: new Date().toDateString()
+            date: 1702600936342
         },
         {
             id: 3,
@@ -27,7 +27,7 @@ export const createTaskStore = function () {
             category: 'Feature',
             status: 'To Do',
             priority: 'Medium',
-            date: new Date().toDateString()
+            date: 1750605036342
         },
         {
             id: 4,
@@ -36,7 +36,7 @@ export const createTaskStore = function () {
             category: 'Refactor',
             status: 'To Do',
             priority: 'Low',
-            date: new Date().toDateString()
+            date: 1752005906342
         },
         {
             id: 5,
@@ -45,7 +45,7 @@ export const createTaskStore = function () {
             category: 'Test',
             status: 'To Do',
             priority: 'Medium',
-            date: new Date().toDateString()
+            date: 1752600930342
         },
         {
             id: 6,
@@ -55,7 +55,7 @@ export const createTaskStore = function () {
             category: 'Test',
             status: 'To Do',
             priority: 'Medium',
-            date: new Date().toDateString()
+            date: 1752605036342
         }
     ];
 
@@ -74,7 +74,7 @@ export const createTaskStore = function () {
         createTask: function (task: TaskInterface) {
             console.log('createTask', this);
             task.id = tmpId++;
-            task.date = new Date().toDateString();
+            task.date = Date.now();
             this.tasks.push(task);
             console.log(this.tasks);
         },

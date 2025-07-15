@@ -1,20 +1,16 @@
 .searchField {
-    background-color: #eeeeee;
-    margin-bottom: 1vh;
+    background-color: #ffffff;
+    margin-bottom: 3vh;
     padding: 1vh;
     border-radius: 6px;
-    box-shadow: 0 0 20px #f3f3f3;
-}
-
-.categoryField {
-    width: 591px;
-}
-
-.priorityField {
-    width: 591px;
+    box-shadow: 0 4px 10px #cfcfcf;
 }
 
 .searchIcon {
     fill: #4b4b4b;
     width: 11px;
+}
+
+.iconSort{
+    color: #787878;
 }

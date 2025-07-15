@@ -9,5 +9,5 @@ export interface TaskInterface {
     category: Category;
     status: Status;
     priority: Priority;
-    date: string | null
+    date: number | null
 }

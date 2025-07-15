@@ -11,9 +11,17 @@ import {
 import {useForm} from '@mantine/form';
 import styles from './taskDetails.module.css';
 import {observer} from 'mobx-react-lite';
+import { format } from 'date-fns';
 
-export default observer(function TaskDetails({currentTask, onSubmitProp, onCancelProp}:{currentTask: TaskInterface, onSubmitProp: (taskData: TaskInterface)=>void, onCancelProp: ()=>void}) {
-
+export default observer(function TaskDetails({
+    currentTask,
+    onSubmitProp,
+    onCancelProp
+}: {
+    currentTask: TaskInterface;
+    onSubmitProp: (taskData: TaskInterface) => void;
+    onCancelProp: () => void;
+}) {
     const form = useForm({
         mode: 'uncontrolled',
         initialValues: {
@@ -27,9 +35,11 @@ export default observer(function TaskDetails({currentTask, onSubmitProp, onCance
         },
 
         validate: {
-            title: (value) => (/\S+/.test(value) ? null : 'Title can\'t be empty'),
+            title: (value) =>
+                /\S+/.test(value) ? null : "Title can't be empty"
         }
     });
+    const dateString = format(new Date(currentTask.date!), "dd MMM yyyy HH:mm:ss")
     return (
         <Paper className={styles.form} shadow='md' radius='md'>
             <form onSubmit={form.onSubmit(onSubmitProp)}>
@@ -39,6 +49,14 @@ export default observer(function TaskDetails({currentTask, onSubmitProp, onCance
                     key={form.key('title')}
                     {...form.getInputProps('title')}
                 />
+                {currentTask.date && (
+                    <Text fz='sm' fw={500} ta='left'>
+                        Create date
+                        <Text fz='sm' ta='left'>
+                            {dateString}
+                        </Text>
+                    </Text>
+                )}
                 <Textarea
                     label='Description'
                     key={form.key('description')}
@@ -88,9 +106,7 @@ export default observer(function TaskDetails({currentTask, onSubmitProp, onCance
                 />
 
                 <Group justify='flex-end' mt='md'>
-                    <Button type='submit'>
-                        Save
-                    </Button>
+                    <Button type='submit'>Save</Button>
                     <Button color='#a6a6a6ff' onClick={onCancelProp}>
                         Cancel
                     </Button>
@@ -98,4 +114,4 @@ export default observer(function TaskDetails({currentTask, onSubmitProp, onCance
             </form>
         </Paper>
     );
-})
+});

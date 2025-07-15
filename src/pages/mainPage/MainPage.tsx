@@ -1,5 +1,5 @@
 import {Button, Flex, Group, Input, Stack, TagsInput} from '@mantine/core';
-import {useState} from 'react';
+import {useState, type JSX} from 'react';
 import type {TaskInterface} from '@shared/model/types';
 import {TaskList} from '@widgets/taskList';
 import {Carousel} from '@mantine/carousel';
@@ -8,6 +8,22 @@ import SearchIcon from '@shared/ui/search.svg?react';
 import {observer} from 'mobx-react-lite';
 import {useTaskStore} from '@/app/taskStore';
 import {useNavigate} from 'react-router';
+import {useToggle} from '@mantine/hooks';
+import SortAscIcon from '@shared/ui/sortAsc.svg?react';
+import SortDescIcon from '@shared/ui/sortDesc.svg?react';
+import SortNoneIcon from '@shared/ui/sortNone.svg?react';
+
+const iconOrderMap: {[key: string]: JSX.Element} = {
+    none: <SortNoneIcon className={styles.iconSort} />,
+    asc: <SortAscIcon className={styles.iconSort} />,
+    desc: <SortDescIcon className={styles.iconSort} />
+};
+
+const priorityNumber: {[key: string]: number} = {
+    Low: 0,
+    Medium: 1,
+    High: 2
+};
 
 export default observer(function MainPage() {
     const {tasks}: {tasks: TaskInterface[]} = useTaskStore();
@@ -19,12 +35,31 @@ export default observer(function MainPage() {
     const [searchPriority, setSearchPriority] = useState<string[] | undefined>(
         []
     );
+    const [sortOrderDate, toggleSortOrderDate] = useToggle([
+        'none',
+        'asc',
+        'desc'
+    ]);
+    const [sortOrderPriority, toggleSortOrderPriority] = useToggle([
+        'none',
+        'asc',
+        'desc'
+    ]);
+
     const regSearch = new RegExp(searchWord, 'i');
+
     let searchFilteredTasks = tasks.filter(
         (task) =>
             regSearch.test(task.title) ||
             (task.description && regSearch.test(task.description))
     ); //фильтруем по title или, если существует description, то по нему тоже
+    if (sortOrderDate !== 'none') {
+        searchFilteredTasks.sort(sortDate);
+    }
+    if (sortOrderPriority !== 'none') {
+        searchFilteredTasks.sort(sortPriority);
+    }
+
     if (searchCategory?.length) {
         searchFilteredTasks = searchFilteredTasks.filter((task) =>
             searchCategory.includes(task.category)
@@ -47,11 +82,48 @@ export default observer(function MainPage() {
     function handleCreateTask() {
         navigate('/task/new');
     }
+
+    function sortDate(a: TaskInterface, b: TaskInterface) {
+        console.log(a.date! - b.date!);
+        if (sortOrderDate === 'asc') return a.date! - b.date!;
+        return b.date! - a.date!;
+    }
+
+    function sortPriority(a: TaskInterface, b: TaskInterface) {
+        console.log(priorityNumber[a.priority] - priorityNumber[b.priority])
+        if (sortOrderPriority === 'asc') return priorityNumber[a.priority] - priorityNumber[b.priority];
+        return priorityNumber[b.priority] - priorityNumber[a.priority];
+    }
+
     return (
         <>
-            <Group justify="space-between">
+            <Group justify='space-between'>
                 <h2>TaskManager Siriur</h2>
-                <Button onClick={handleCreateTask}>Add task</Button>
+                <Group gap='xs'>
+                    <Button
+                        color='#787878'
+                        variant='outline'
+                        rightSection={iconOrderMap[sortOrderPriority]}
+                        onClick={() => {
+                            toggleSortOrderDate('none');
+                            toggleSortOrderPriority();
+                        }}
+                    >
+                        Priority
+                    </Button>
+                    <Button
+                        color='#787878'
+                        variant='outline'
+                        rightSection={iconOrderMap[sortOrderDate]}
+                        onClick={() => {
+                            toggleSortOrderPriority('none');
+                            toggleSortOrderDate();
+                        }}
+                    >
+                        Date
+                    </Button>
+                    <Button onClick={handleCreateTask}>Add task</Button>
+                </Group>
             </Group>
             <Stack className={styles.searchField}>
                 <Input
@@ -71,7 +143,6 @@ export default observer(function MainPage() {
                 />
                 <Group>
                     <TagsInput
-                        className={styles.categoryField}
                         ta='left'
                         label='Category'
                         value={searchCategory}
@@ -87,7 +158,6 @@ export default observer(function MainPage() {
                         clearable
                     />
                     <TagsInput
-                        className={styles.priorityField}
                         ta='left'
                         label='Priority'
                         value={searchPriority}
@@ -129,7 +199,7 @@ export default observer(function MainPage() {
                 hiddenFrom='xs'
                 withIndicators
                 withControls
-                slideSize='60%'
+                slideSize='70%'
                 slideGap='sm'
                 emblaOptions={{
                     loop: true
