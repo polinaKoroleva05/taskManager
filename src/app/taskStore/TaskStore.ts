@@ -2,6 +2,7 @@ import type {TaskInterface} from '@shared/model/types';
 import {useCallback, useState} from 'react';
 
 export const createTaskStore = function () {
+    let tmpId = 7;
     let tasks: TaskInterface[] = [
         {
             id: 1,
@@ -9,14 +10,16 @@ export const createTaskStore = function () {
             description: 'do task1 please',
             category: 'Bug',
             status: 'Done',
-            priority: 'Low'
+            priority: 'Low',
+            date: new Date().toDateString()
         },
         {
             id: 2,
             title: 'Task2',
             category: 'Documentation',
             status: 'In Progress',
-            priority: 'High'
+            priority: 'High',
+            date: new Date().toDateString()
         },
         {
             id: 3,
@@ -24,7 +27,8 @@ export const createTaskStore = function () {
             description: 'make it good',
             category: 'Feature',
             status: 'To Do',
-            priority: 'Medium'
+            priority: 'Medium',
+            date: new Date().toDateString()
         },
         {
             id: 4,
@@ -32,7 +36,8 @@ export const createTaskStore = function () {
             description: 'Take some rest',
             category: 'Refactor',
             status: 'To Do',
-            priority: 'Low'
+            priority: 'Low',
+            date: new Date().toDateString()
         },
         {
             id: 5,
@@ -40,7 +45,8 @@ export const createTaskStore = function () {
             description: 'Do homework',
             category: 'Test',
             status: 'To Do',
-            priority: 'Medium'
+            priority: 'Medium',
+            date: new Date().toDateString()
         },
         {
             id: 6,
@@ -49,7 +55,8 @@ export const createTaskStore = function () {
                 'Супер подробное описание задачи, со всеми нужными технологиями, уточнениями, шутками-прибаутками, с заходом издалека, с благодарностями, пожеланиями, жалобами, воодушевлениями',
             category: 'Test',
             status: 'To Do',
-            priority: 'Medium'
+            priority: 'Medium',
+            date: new Date().toDateString()
         }
     ];
 
@@ -67,6 +74,8 @@ export const createTaskStore = function () {
         },
         createTask: function (task: TaskInterface) {
             console.log('createTask', this);
+            task.id = tmpId++;
+            task.date = new Date().toDateString();
             this.tasks.push(task);
             console.log(this.tasks);
         },

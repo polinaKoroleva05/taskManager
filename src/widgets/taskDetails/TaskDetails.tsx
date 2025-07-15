@@ -15,22 +15,7 @@ import styles from './taskDetails.module.css';
 import {observer} from 'mobx-react-lite';
 import {useTaskStore} from '@/app/taskStore';
 
-export default observer(function TaskDetails() {
-    const navigate = useNavigate();
-    const {id} = useParams();
-    const Taskstore: {
-        tasks: TaskInterface[];
-        updateTask: ({id, task}: {id: number; task: TaskInterface}) => void;
-    } = useTaskStore();
-    const currentTask = Taskstore.tasks.find((item) => item.id === Number(id));
-    if (!currentTask) {
-        return <p> Not Found :c </p>;
-    }
-    function handleSubmit(values: typeof form.values) {
-        console.log(Taskstore)
-        Taskstore.updateTask({id: Number(id), task: values});
-        navigate('/');
-    }
+export default observer(function TaskDetails({currentTask, onSubmitProp, onCancelProp}:{currentTask: TaskInterface, onSubmitProp: (taskData: TaskInterface)=>void, onCancelProp: ()=>void}) {
 
     const form = useForm({
         mode: 'uncontrolled',
@@ -40,7 +25,8 @@ export default observer(function TaskDetails() {
             category: currentTask.category,
             status: currentTask.status,
             priority: currentTask.priority,
-            id: currentTask.id
+            id: currentTask.id,
+            date: currentTask.date
         },
 
         validate: {
@@ -49,7 +35,7 @@ export default observer(function TaskDetails() {
     });
     return (
         <Paper className={styles.form} shadow='md' radius='md'>
-            <form onSubmit={form.onSubmit(handleSubmit)}>
+            <form onSubmit={form.onSubmit(onSubmitProp)}>
                 <TextInput
                     withAsterisk
                     label='Title'
@@ -108,7 +94,7 @@ export default observer(function TaskDetails() {
                     <Button type='submit'>
                         Save
                     </Button>
-                    <Button color='#a6a6a6ff' onClick={() => navigate('/')}>
+                    <Button color='#a6a6a6ff' onClick={onCancelProp}>
                         Cancel
                     </Button>
                 </Group>
