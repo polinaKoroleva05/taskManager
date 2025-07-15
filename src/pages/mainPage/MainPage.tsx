@@ -1,5 +1,5 @@
 import {Button, Flex, Group, Input, Stack, TagsInput} from '@mantine/core';
-import {useContext, useState} from 'react';
+import {useState} from 'react';
 import type {TaskInterface} from '@shared/model/types';
 import {TaskList} from '@widgets/taskList';
 import {Carousel} from '@mantine/carousel';

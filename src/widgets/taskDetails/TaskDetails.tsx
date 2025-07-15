@@ -1,5 +1,3 @@
-import {useContext} from 'react';
-import {useNavigate, useParams} from 'react-router';
 import type {TaskInterface} from '@shared/model/types';
 import {
     Button,
@@ -13,7 +11,6 @@ import {
 import {useForm} from '@mantine/form';
 import styles from './taskDetails.module.css';
 import {observer} from 'mobx-react-lite';
-import {useTaskStore} from '@/app/taskStore';
 
 export default observer(function TaskDetails({currentTask, onSubmitProp, onCancelProp}:{currentTask: TaskInterface, onSubmitProp: (taskData: TaskInterface)=>void, onCancelProp: ()=>void}) {
 

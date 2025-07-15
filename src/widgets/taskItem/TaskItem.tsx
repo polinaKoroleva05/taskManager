@@ -2,7 +2,6 @@ import {Badge, Button, Group, Paper, Text, Title} from '@mantine/core';
 import type {TaskInterface} from '@shared/model/types';
 import styles from './taskItem.module.css';
 import EditIcon from '@shared/ui/edit.svg?react';
-import {useContext} from 'react';
 import {useNavigate} from 'react-router';
 import {observer} from 'mobx-react-lite';
 import {useTaskStore} from '@/app/taskStore';
@@ -34,9 +33,9 @@ export default observer(function TaskItem({item}: {item: TaskInterface}) {
         tasks: TaskInterface[];
         deleteTask: (id: number) => void;
     } = useTaskStore();
-    function handleDelete(event) {
+    function handleDelete(event: any) {
         event.stopPropagation();
-        Taskstore.deleteTask(item.id);
+        Taskstore.deleteTask(item.id!);
     }
     return (
         <Paper

@@ -1,5 +1,5 @@
 import { useTaskStore } from '@/app/taskStore';
-import {TaskInterface} from '@/shared/model/types';
+import type {TaskInterface} from '@/shared/model/types';
 import {TaskDetails} from '@/widgets/taskDetails';
 import {useNavigate} from 'react-router';
 

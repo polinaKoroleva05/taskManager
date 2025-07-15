@@ -1,6 +1,6 @@
 import {useNavigate, useParams} from 'react-router';
 import {TaskDetails} from '@/widgets/taskDetails';
-import {TaskInterface} from '@/shared/model/types';
+import type {TaskInterface} from '@/shared/model/types';
 import { useTaskStore } from '@/app/taskStore';
 
 export default function EditTaskPage() {

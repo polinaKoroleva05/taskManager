@@ -1,5 +1,4 @@
 import type {TaskInterface} from '@shared/model/types';
-import {useCallback, useState} from 'react';
 
 export const createTaskStore = function () {
     let tmpId = 7;
