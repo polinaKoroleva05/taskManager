@@ -3,8 +3,17 @@
     padding: 20px;
 }
 
-.icon{
+.iconEdit{
     fill: rgb(99, 99, 99);
     width: 11px;
-    margin-right: 5px;
+}
+
+.iconDelete{
+    color: rgb(52, 52, 52);
+    width: 15px;
+}
+
+.iconButton{
+    padding: 5px;
+    /* width: 20px; */
 }

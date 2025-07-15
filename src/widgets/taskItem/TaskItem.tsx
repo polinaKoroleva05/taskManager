@@ -3,8 +3,10 @@ import type {TaskInterface} from '@shared/model/types';
 import styles from './taskItem.module.css';
 import EditIcon from '@shared/ui/edit.svg?react';
 import {useContext} from 'react';
-import {TasksContext} from '@store/Context';
 import {useNavigate} from 'react-router';
+import {observer} from 'mobx-react-lite';
+import {useTaskStore} from '@/app/taskStore';
+import DeleteIcon from '@shared/ui/delete.svg?react'
 
 const PriorityMap = {
     Low: '#8bade8ff',
@@ -26,59 +28,82 @@ const CategoryMap = {
     Test: {from: '#3bcb33ff', to: '#b0cf32ff', deg: 45}
 };
 
-export default function TaskItem({id}: {id: number}) {
-    const {tasks}: {tasks: TaskInterface[]} = useContext(TasksContext);
+export default observer(function TaskItem({item}: {item: TaskInterface}) {
     const navigate = useNavigate();
-    const currentTask = tasks.find((item) => item.id === id);
+    const Taskstore: {
+        tasks: TaskInterface[];
+        deleteTask: (id: number) => void;
+    } = useTaskStore();
+    function handleDelete(event) {
+        event.stopPropagation();
+        Taskstore.deleteTask(item.id);
+    }
     return (
-        <Paper shadow='sm' radius='md' className={styles.taskItem}>
-            {currentTask && (
+        <Paper
+            shadow='sm'
+            radius='md'
+            className={styles.taskItem}
+            onClick={() => navigate(`task/${item.id}`)}
+        >
+            {item && (
                 <>
                     <Group justify='space-between'>
                         <Badge
                             variant='light'
-                            color={PriorityMap[currentTask.priority]}
+                            color={PriorityMap[item.priority]}
                             size='sm'
                         >
-                            {currentTask.priority}
+                            {item.priority}
                         </Badge>
-                        <Button
-                            variant='default'
-                            color='#8c8c8cff'
-                            size='xs'
-                            radius='sm'
-                            onClick={() => navigate(`task/${id}`)}
-                        >
-                            <EditIcon className={styles.icon} />
-                            Edit
-                        </Button>
+                        <Group gap="0">
+                            <Button
+                                variant="transparent"
+                                color='#8c8c8cff'
+                                size='xs'
+                                radius='sm'
+                                onClick={() => navigate(`task/${item.id}`)}
+                                className={styles.iconButton}
+                            >
+                                <EditIcon className={styles.iconEdit} />
+                            </Button>
+                            <Button
+                                variant="transparent"
+                                color='#8c8c8cff'
+                                size='xs'
+                                radius='sm'
+                                onClick={handleDelete}
+                                className={styles.iconButton}
+                            >
+                                <DeleteIcon className={styles.iconDelete}/>
+                            </Button>
+                        </Group>
                     </Group>
                     <Title ta='left' order={5}>
-                        {currentTask.title}
+                        {item.title}
                     </Title>
-                    {currentTask.description && (
-                        <Text ta='left'> {currentTask.description}</Text>
+                    {item.description && (
+                        <Text ta='left'> {item.description}</Text>
                     )}
-                    <Group style={{'padding-top': '1vw'}}>
+                    <Group style={{paddingTop: '1vw'}}>
                         <Badge
                             variant='dot'
                             radius='sm'
-                            color={StatusMap[currentTask.status]}
+                            color={StatusMap[item.status]}
                             size='sm'
                         >
-                            {currentTask.status}
+                            {item.status}
                         </Badge>
                         <Badge
                             radius='sm'
                             variant='gradient'
-                            gradient={CategoryMap[currentTask.category]}
+                            gradient={CategoryMap[item.category]}
                             size='sm'
                         >
-                            {currentTask.category}
+                            {item.category}
                         </Badge>
                     </Group>
                 </>
             )}
         </Paper>
     );
-}
+});

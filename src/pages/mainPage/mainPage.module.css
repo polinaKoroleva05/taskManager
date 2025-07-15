@@ -1,4 +1,4 @@
-.searchField{
+.searchField {
     background-color: #eeeeee;
     margin-bottom: 1vh;
     padding: 1vh;
@@ -6,15 +6,15 @@
     box-shadow: 0 0 20px #f3f3f3;
 }
 
-.categoryField{
+.categoryField {
     width: 591px;
 }
 
-.priorityField{
+.priorityField {
     width: 591px;
 }
 
-.searchIcon{
+.searchIcon {
     fill: #4b4b4b;
     width: 11px;
 }

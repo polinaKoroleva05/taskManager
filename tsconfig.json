@@ -18,7 +18,7 @@
                 "src/shared/*"
             ],
             "@store/*": [
-                "src/app/store/*"
+                "src/app/taskStore/*"
             ]
         }
     }

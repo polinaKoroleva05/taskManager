@@ -1,4 +1,4 @@
-import TaskItem from '@widgets/taskItem/TaskItem';
+import {TaskItem} from '@widgets/taskItem';
 import type {TaskInterface} from '@shared/model/types';
 import {Flex, Paper, Title} from '@mantine/core';
 
@@ -16,7 +16,7 @@ export default function TaskList({
             <Title order={5}> {title} </Title>
             <Flex gap='xs' align='center' direction='column'>
                 {tasks.map((item, key) => (
-                    <TaskItem id={item.id} key={key} />
+                    <TaskItem item={item} key={key} />
                 ))}
             </Flex>
         </Paper>

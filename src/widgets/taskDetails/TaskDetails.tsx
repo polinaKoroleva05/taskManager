@@ -1,6 +1,5 @@
 import {useContext} from 'react';
 import {useNavigate, useParams} from 'react-router';
-import {TasksContext} from '@store/Context';
 import type {TaskInterface} from '@shared/model/types';
 import {
     Button,
@@ -13,23 +12,23 @@ import {
 } from '@mantine/core';
 import {useForm} from '@mantine/form';
 import styles from './taskDetails.module.css';
+import {observer} from 'mobx-react-lite';
+import {useTaskStore} from '@/app/taskStore';
 
-export default function TaskDetails() {
+export default observer(function TaskDetails() {
     const navigate = useNavigate();
     const {id} = useParams();
-    const {
-        tasks,
-        setTask
-    }: {
+    const Taskstore: {
         tasks: TaskInterface[];
-        setTask: ({id, task}: {id: number; task: TaskInterface}) => void;
-    } = useContext(TasksContext);
-    const currentTask = tasks.find((item) => item.id === Number(id));
+        updateTask: ({id, task}: {id: number; task: TaskInterface}) => void;
+    } = useTaskStore();
+    const currentTask = Taskstore.tasks.find((item) => item.id === Number(id));
     if (!currentTask) {
         return <p> Not Found :c </p>;
     }
     function handleSubmit(values: typeof form.values) {
-        setTask({id: Number(id), task: values});
+        console.log(Taskstore)
+        Taskstore.updateTask({id: Number(id), task: values});
         navigate('/');
     }
 
@@ -45,7 +44,7 @@ export default function TaskDetails() {
         },
 
         validate: {
-            // email: (value) => (/^\S+@\S+$/.test(value) ? null : 'Invalid email'),
+            title: (value) => (/\S+/.test(value) ? null : 'Title can\'t be empty'),
         }
     });
     return (
@@ -106,7 +105,7 @@ export default function TaskDetails() {
                 />
 
                 <Group justify='flex-end' mt='md'>
-                    <Button color='#80b654ff' type='submit'>
+                    <Button type='submit'>
                         Save
                     </Button>
                     <Button color='#a6a6a6ff' onClick={() => navigate('/')}>
@@ -116,4 +115,4 @@ export default function TaskDetails() {
             </form>
         </Paper>
     );
-}
+})
