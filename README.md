@@ -4,6 +4,16 @@
 ### Для ознакомления проект доступен по ссылке:
 [https://task-manager-peach-rho.vercel.app/](https://task-manager-peach-rho.vercel.app/)
 
+### Используемые технологии:
+-  React (с использованием TypeScript)
+-  React Router v6 для маршрутизации
+-  Сборщик проекта: Vite
+-  UI-фреймворк: Mantine
+-  Инструменты стилизации: css modules
+-  Плагин для работы с svg: vite-plugin-svgr
+-  Tanstack для управления кэшированием данных от сервера
+-  Express.js для сервера, описание которого приведено в конце README
+
 ### Главная страница:
 ![Главная страница](https://github.com/polinaKoroleva05/taskManager/blob/main/public/mainPage.png)
 
@@ -13,6 +23,7 @@
 ### Доступно переключение на темную тему:
 ![Главная страница](https://github.com/polinaKoroleva05/taskManager/blob/main/public/mainPageDark.png)
 
+### Установка:
 <ins>Установка для дальнейшей разработки:</ins>
 1. Склонируйте репозиторий 
 2. Установите npm и Node, если еще не устанавливали. В корне проекта запустите команду `npm install`
@@ -22,17 +33,7 @@
 1. Скачайте папку dist
 2. Используйте dist/index.html как entry point
 
-Используемые технологии:
--  React (с использованием TypeScript)
--  React Router v6 для маршрутизации
--  Сборщик проекта: Vite
--  UI-фреймворк: Mantine
--  Инструменты стилизации: css modules
--  Плагин для работы с svg: vite-plugin-svgr
--  Tanstack для управления кэшированием данных от сервера
-
-
-Приложение использует архитектуру Feature-Sliced Design.
+### Приложение использует архитектуру Feature-Sliced Design.
 Использованы следующие слои: App, Pages, Widgets, Shared. Краткое описание каждого слоя (взято с сайта [https://feature-sliced.github.io/documentation/ru/docs/get-started/overview](https://feature-sliced.github.io/documentation/ru/docs/get-started/overview)):
 - App — всё, благодаря чему приложение запускается — роутинг, точки входа, глобальные стили, провайдеры и т. д.
 - Pages (страницы) — полные страницы или большие части страницы при вложенном роутинге.
