@@ -8,7 +8,6 @@ import {
     Paper,
     TagsInput,
     useMantineColorScheme,
-    useMantineTheme
 } from '@mantine/core';
 import {useState, type JSX} from 'react';
 import type {TaskInterface} from '@shared/model/types';
