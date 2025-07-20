@@ -1,1 +1,3 @@
-export {TaskStoreProvider, useTaskStore} from './TaskStoreProvider'
+export {getTaskQueryMiddleware} from './taskQueryMiddleware'
+export {useIdTaskQuery} from './useIdTaskQuery'
+export {useTasksQuery} from './useTasksQuery'

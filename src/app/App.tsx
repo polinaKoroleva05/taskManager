@@ -2,7 +2,6 @@ import '@mantine/core/styles.css';
 import {MantineProvider} from '@mantine/core';
 import './App.css';
 import {Route, Routes} from 'react-router';
-import {TaskStoreProvider} from '@/app/taskStore';
 import {MainPage} from '@pages/mainPage';
 import {NewTaskPage} from '@/pages/newTaskPage';
 import '@mantine/core/styles.css';
@@ -16,7 +15,6 @@ function App() {
     return (
         <MantineProvider>
             <ModalsProvider>
-                <TaskStoreProvider>
                     <QueryClientProvider client={client}>
                         <Routes>
                             <Route path='/' element={<MainPage />} />
@@ -27,7 +25,6 @@ function App() {
                             <Route path='task/new' element={<NewTaskPage />} />
                         </Routes>
                     </QueryClientProvider>
-                </TaskStoreProvider>
             </ModalsProvider>
         </MantineProvider>
     );
