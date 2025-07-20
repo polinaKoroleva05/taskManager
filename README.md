@@ -31,10 +31,6 @@
 -  Плагин для работы с svg: vite-plugin-svgr
 -  Tanstack для управления кэшированием данных от сервера
 
-Сервер [https://github.com/polinaKoroleva05/taskManagerApi](https://github.com/polinaKoroleva05/taskManagerApi):
- - Для сервера использовался фреймворк Express.js
- - Cохранение данных в json файл
- - Сервер поднят на vercel
 
 Приложение использует архитектуру Feature-Sliced Design.
 Использованы следующие слои: App, Pages, Widgets, Shared. Краткое описание каждого слоя (взято с сайта [https://feature-sliced.github.io/documentation/ru/docs/get-started/overview](https://feature-sliced.github.io/documentation/ru/docs/get-started/overview)):
@@ -42,3 +38,10 @@
 - Pages (страницы) — полные страницы или большие части страницы при вложенном роутинге.
 - Widgets (виджеты) — большие самодостаточные куски функциональности или интерфейса, обычно реализующие целый пользовательский сценарий.
 - Shared — переиспользуемый код, особенно когда он отделён от специфики проекта/бизнеса, хотя это не обязательно.
+
+### API 
+
+[https://github.com/polinaKoroleva05/taskManagerApi](https://github.com/polinaKoroleva05/taskManagerApi):
+ - Для сервера использовался фреймворк Express.js
+ - Cохранение данных в json файл
+ - Сервер поднят на vercel
