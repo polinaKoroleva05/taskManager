@@ -3,6 +3,8 @@
 Веб-приложение "Менеджер задач", позволяющее просматривать список задач и редактировать их. 
 ![Главная страница](https://github.com/polinaKoroleva05/taskManager/blob/main/public/mainPage.png)
 ![Страница редактирования задачи](https://github.com/polinaKoroleva05/taskManager/blob/main/public/editPage.png)
+Пользователь может переключиться на темную тему:
+![Главная страница](https://github.com/polinaKoroleva05/taskManager/blob/main/public/mainPageDark.png)
 Для ознакомления проект доступен по ссылке:
 [https://task-manager-peach-rho.vercel.app/](https://task-manager-peach-rho.vercel.app/)
 
@@ -22,7 +24,12 @@
 -  UI-фреймворк: Mantine
 -  Инструменты стилизации: css modules
 -  Плагин для работы с svg: vite-plugin-svgr
--  localStorage для хранения данных между сессиями
+-  Tanstack для управления кэшированием данных от сервера
+
+Сервер [https://github.com/polinaKoroleva05/taskManagerApi](https://github.com/polinaKoroleva05/taskManagerApi):
+ - Для сервера использовался фреймворк Express.js
+ - Cохранение данных в json файл
+ - Сервер поднят на vercel
 
 Приложение использует архитектуру Feature-Sliced Design.
 Использованы следующие слои: App, Pages, Widgets, Shared. Краткое описание каждого слоя (взято с сайта [https://feature-sliced.github.io/documentation/ru/docs/get-started/overview](https://feature-sliced.github.io/documentation/ru/docs/get-started/overview)):
