@@ -28,6 +28,11 @@ const CategoryMap = {
     Test: {from: '#3bcb33ff', to: '#b0cf32ff', deg: 45}
 };
 
+/**
+ * A functional React component that displays card task.
+ * @param {TaskInterface} item - Data about task to display in card.
+ * @returns {React.Element} A React element displaying card of task.
+ */
 export default observer(function TaskItem({item}: {item: TaskInterface}) {
     const navigate = useNavigate();
     const Taskstore: {

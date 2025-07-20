@@ -4,7 +4,7 @@
 ![Главная страница](https://github.com/polinaKoroleva05/taskManager/blob/main/public/mainPage.png)
 ![Страница редактирования задачи](https://github.com/polinaKoroleva05/taskManager/blob/main/public/editPage.png)
 Для ознакомления проект доступен по ссылке:
-[https://polinakoroleva05.github.io/taskManager/](https://polinakoroleva05.github.io/taskManager/)
+[https://task-manager-peach-rho.vercel.app/](https://task-manager-peach-rho.vercel.app/)
 
 <ins>Установка для дальнейшей разработки:</ins>
 1. Склонируйте репозиторий 
@@ -22,4 +22,11 @@
 -  UI-фреймворк: Mantine
 -  Инструменты стилизации: css modules
 -  Плагин для работы с svg: vite-plugin-svgr
+-  localStorage для хранения данных между сессиями
 
+Приложение использует архитектуру Feature-Sliced Design.
+Использованы следующие слои: App, Pages, Widgets, Shared. Краткое описание каждого слоя (взято с сайта [https://feature-sliced.github.io/documentation/ru/docs/get-started/overview](https://feature-sliced.github.io/documentation/ru/docs/get-started/overview)):
+- App — всё, благодаря чему приложение запускается — роутинг, точки входа, глобальные стили, провайдеры и т. д.
+- Pages (страницы) — полные страницы или большие части страницы при вложенном роутинге.
+- Widgets (виджеты) — большие самодостаточные куски функциональности или интерфейса, обычно реализующие целый пользовательский сценарий.
+- Shared — переиспользуемый код, особенно когда он отделён от специфики проекта/бизнеса, хотя это не обязательно.

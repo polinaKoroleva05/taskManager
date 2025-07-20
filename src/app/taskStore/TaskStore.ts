@@ -1,8 +1,9 @@
 import type {TaskInterface} from '@shared/model/types';
-
+const nameOfLocalStorage = 'taskManagerSiriur';
 export const createTaskStore = function () {
     let tmpId = 7;
-    let tasks: TaskInterface[] = [
+
+    let tasksDefault: TaskInterface[] = [
         {
             id: 1,
             title: 'Task1',
@@ -59,8 +60,27 @@ export const createTaskStore = function () {
         }
     ];
 
+    if (
+        !localStorage.getItem(nameOfLocalStorage) ||
+        localStorage.getItem(nameOfLocalStorage) === undefined
+    ) {
+        localStorage.setItem(nameOfLocalStorage, JSON.stringify(tasksDefault));
+    }
+    const tasksFromStorage = JSON.parse(
+        localStorage.getItem(nameOfLocalStorage)!
+    );
+    // let validNotes = notesFromStorage.filter(
+    //     (task) =>
+    //         note.hasOwnProperty('name') &&
+    //         note.hasOwnProperty('content') &&
+    //         note.hasOwnProperty('date')
+    // ); //если данные подпорчены, убираем их
+    // if (!validNotes.length) {
+    //     validNotes = [testData]; //если все данные оказались некорректными, устанавливаем начальную записку
+    // }
+
     return {
-        tasks,
+        tasks: tasksFromStorage,
         updateTask: function ({id, task}: {id: number; task: TaskInterface}) {
             console.log('updateTask', this);
             for (let i = 0; i < this.tasks.length; i++) {
@@ -69,6 +89,10 @@ export const createTaskStore = function () {
                     break;
                 }
             }
+            localStorage.setItem(
+                nameOfLocalStorage,
+                JSON.stringify(this.tasks)
+            );
             console.log(this.tasks);
         },
         createTask: function (task: TaskInterface) {
@@ -76,12 +100,22 @@ export const createTaskStore = function () {
             task.id = tmpId++;
             task.date = Date.now();
             this.tasks.push(task);
+            localStorage.setItem(
+                nameOfLocalStorage,
+                JSON.stringify(this.tasks)
+            );
             console.log(this.tasks);
         },
         deleteTask: function (id: number) {
             console.log('deleteTask', this);
-            const deleteInd = this.tasks.findIndex((task) => task.id === id);
+            const deleteInd = this.tasks.findIndex(
+                (task: TaskInterface) => task.id === id
+            );
             this.tasks.splice(deleteInd, 1);
+            localStorage.setItem(
+                nameOfLocalStorage,
+                JSON.stringify(this.tasks)
+            );
             console.log(this.tasks);
         }
     };
