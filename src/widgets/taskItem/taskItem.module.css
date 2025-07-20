@@ -1,15 +1,16 @@
 .taskItem{
     width: 100%;
     padding: 20px;
+        border: 1px solid var(     --mantine-color-disabled-border);
 }
 
 .iconEdit{
-    fill: rgb(99, 99, 99);
+    fill: #7a7a7a;
     width: 11px;
 }
 
 .iconDelete{
-    color: rgb(52, 52, 52);
+    color: #7a7a7a;
     width: 15px;
 }
 

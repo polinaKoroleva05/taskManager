@@ -3,7 +3,8 @@ import {TaskDetails} from '@/widgets/taskDetails';
 import type {TaskInterface} from '@/shared/model/types';
 import {getTaskQueryMiddleware} from '@store/taskQueryMiddleware';
 import {useIdTaskQuery} from '@store/useIdTaskQuery';
-import { Loader } from '@mantine/core';
+import { Loader} from '@mantine/core';
+import styles from './editTaskPage.module.css';
 
 export default function EditTaskPage() {
     const navigate = useNavigate();
@@ -31,11 +32,12 @@ export default function EditTaskPage() {
         }
         navigate('/');
     }
-    return (
+    return (<div className={styles.page}>
         <TaskDetails
             currentTask={currentTask}
             onSubmitProp={handleEditTask}
             onCancelProp={() => navigate('/')}
         />
+    </div>
     );
 }

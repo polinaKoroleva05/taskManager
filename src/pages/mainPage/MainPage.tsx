@@ -1,11 +1,14 @@
 import {
+    ActionIcon,
     Button,
     Flex,
     Group,
     Input,
     Loader,
-    Stack,
-    TagsInput
+    Paper,
+    TagsInput,
+    useMantineColorScheme,
+    useMantineTheme
 } from '@mantine/core';
 import {useState, type JSX} from 'react';
 import type {TaskInterface} from '@shared/model/types';
@@ -19,6 +22,8 @@ import {useToggle} from '@mantine/hooks';
 import SortAscIcon from '@shared/ui/sortAsc.svg?react';
 import SortDescIcon from '@shared/ui/sortDesc.svg?react';
 import SortNoneIcon from '@shared/ui/sortNone.svg?react';
+import SunIcon from '@shared/ui/sun.svg?react';
+import MoonIcon from '@shared/ui/moon.svg?react';
 
 const iconOrderMap: {[key: string]: JSX.Element} = {
     none: <SortNoneIcon className={styles.iconSort} />,
@@ -33,6 +38,11 @@ const priorityNumber: {[key: string]: number} = {
 };
 
 export default function MainPage() {
+    const {setColorScheme} = useMantineColorScheme();
+    const mantineTheme = document.documentElement.getAttribute(
+        'data-mantine-color-scheme'
+    );
+    console.log(mantineTheme)
     const {data: tasks, isLoading, isSuccess} = useTasksQuery();
     console.log('tanstack', tasks, isLoading, isSuccess);
     const [searchWord, setSearchWord] = useState('');
@@ -54,7 +64,6 @@ export default function MainPage() {
         'desc'
     ]);
 
-
     if (isLoading) {
         return <Loader />;
     }
@@ -74,13 +83,13 @@ export default function MainPage() {
     }
 
     if (searchCategory?.length) {
-        searchFilteredTasks = searchFilteredTasks.filter((task: TaskInterface) =>
-            searchCategory.includes(task.category)
+        searchFilteredTasks = searchFilteredTasks.filter(
+            (task: TaskInterface) => searchCategory.includes(task.category)
         );
     }
     if (searchPriority?.length) {
-        searchFilteredTasks = searchFilteredTasks.filter((task: TaskInterface) =>
-            searchPriority.includes(task.priority)
+        searchFilteredTasks = searchFilteredTasks.filter(
+            (task: TaskInterface) => searchPriority.includes(task.priority)
         );
     }
     const tasksToDo = searchFilteredTasks.filter(
@@ -109,6 +118,18 @@ export default function MainPage() {
 
     return (
         <>
+            <ActionIcon
+                variant='outline'
+                color={mantineTheme == 'dark' ? 'yellow' : 'blue'}
+                onClick={() => mantineTheme == 'dark' ? setColorScheme('light') : setColorScheme('dark')}
+                title='Toggle color scheme'
+            >
+                {mantineTheme == 'dark' ? (
+                    <SunIcon style={{width: 18, height: 18}} />
+                ) : (
+                    <MoonIcon style={{width: 18, height: 18}} />
+                )}
+            </ActionIcon>
             <Group justify='space-between'>
                 <h2>TaskManager Siriur</h2>
                 <Group gap='xs'>
@@ -124,6 +145,7 @@ export default function MainPage() {
                         Priority
                     </Button>
                     <Button
+                        className={styles.button}
                         color='#787878'
                         variant='outline'
                         rightSection={iconOrderMap[sortOrderDate]}
@@ -137,7 +159,7 @@ export default function MainPage() {
                     <Button onClick={handleCreateTask}>Add task</Button>
                 </Group>
             </Group>
-            <Stack className={styles.searchField}>
+            <Paper shadow='md' className={styles.searchField}>
                 <Input
                     placeholder='Search'
                     value={searchWord}
@@ -179,7 +201,7 @@ export default function MainPage() {
                         clearable
                     />
                 </Group>
-            </Stack>
+            </Paper>
             <Flex
                 visibleFrom='xs'
                 gap='sm'
@@ -205,8 +227,9 @@ export default function MainPage() {
             </Flex>
             <Carousel
                 styles={{
-                    viewport: {position: 'absolute'},
-                    root: {position: 'unset'}
+                    root: {position: 'unset'},
+                    controls: {position: 'fixed'},
+                    indicators: {position: 'fixed'}
                 }}
                 hiddenFrom='xs'
                 withIndicators
@@ -229,4 +252,4 @@ export default function MainPage() {
             </Carousel>
         </>
     );
-};
+}

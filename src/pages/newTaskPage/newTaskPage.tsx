@@ -1,7 +1,8 @@
-import { getTaskQueryMiddleware } from '@store/taskQueryMiddleware';
+import {getTaskQueryMiddleware} from '@store/taskQueryMiddleware';
 import type {TaskInterface} from '@/shared/model/types';
 import {TaskDetails} from '@/widgets/taskDetails';
 import {useNavigate} from 'react-router';
+import styles from './newTaskPage.module.css';
 
 export default function NewTaskPage() {
     const navigate = useNavigate();
@@ -14,16 +15,18 @@ export default function NewTaskPage() {
         priority: 'Low',
         date: null
     };
-    const {createTaskMutation} = getTaskQueryMiddleware()
+    const {createTaskMutation} = getTaskQueryMiddleware();
     function handleCreateTask(taskData: TaskInterface) {
-        createTaskMutation(taskData)
-        navigate('/')
+        createTaskMutation(taskData);
+        navigate('/');
     }
     return (
-        <TaskDetails
-            currentTask={emptyTask}
-            onSubmitProp={handleCreateTask}
-            onCancelProp={() => navigate('/')}
-        />
+        <div className={styles.page}>
+            <TaskDetails
+                currentTask={emptyTask}
+                onSubmitProp={handleCreateTask}
+                onCancelProp={() => navigate('/')}
+            />
+        </div>
     );
 }

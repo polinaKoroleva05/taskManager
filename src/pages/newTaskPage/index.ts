@@ -1,1 +1,1 @@
-export {default as NewTaskPage} from './newTaskPage'
+export {default as NewTaskPage} from './NewTaskPage'

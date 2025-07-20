@@ -78,6 +78,7 @@ export default function TaskDetails({
                     Category
                 </Text>
                 <SegmentedControl
+                    className={styles.scrollable}
                     fullWidth
                     key={form.key('category')}
                     {...form.getInputProps('category')}

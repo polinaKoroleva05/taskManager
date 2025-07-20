@@ -1,6 +1,7 @@
 import {TaskItem} from '@widgets/taskItem';
 import type {TaskInterface} from '@shared/model/types';
 import {Flex, Paper, Title} from '@mantine/core';
+import styles from './taskList.module.css'
 
 /**
  * A functional React component that displays list of tasks.
@@ -19,7 +20,7 @@ export default function TaskList({
     tasks: TaskInterface[];
 }) {
     return (
-        <Paper style={style} shadow='sm' radius='md' bg='#eeeeeeff'>
+        <Paper className={styles.taskList} style={style} shadow='md' radius='md' bg='#00000020'>
             <Title order={5}> {title} </Title>
             <Flex gap='xs' align='center' direction='column'>
                 {tasks.map((item, key) => (

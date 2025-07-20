@@ -1,11 +1,18 @@
-.form{
+.form {
     text-align: start;
-    min-width: 400px;
-    height: 640px;
+    max-width: 400px;
+    width: 100vw;
+    /* max-height: 640px;
+    height: 120vh; */
     padding: 10px;
     border-radius: 6px;
+    border: 1px solid var(--mantine-color-disabled-border);
 }
 
-.labelFormat{
+.labelFormat {
     font-weight: 400;
+}
+
+.scrollable {
+    overflow-x: auto;
 }

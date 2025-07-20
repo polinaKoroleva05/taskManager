@@ -1,14 +1,18 @@
 .searchField {
-    background-color: #ffffff;
     margin-bottom: 3vh;
     padding: 1vh;
     border-radius: 6px;
-    box-shadow: 0 4px 10px #cfcfcf;
+    border: 1px solid var(     --mantine-color-disabled-border);
+    /* box-shadow: 0 4px 10px #00000044; */
 }
 
 .searchIcon {
     fill: #4b4b4b;
     width: 11px;
+}
+
+button:focus-visible, button:focus{
+    outline: none;
 }
 
 .iconSort{
