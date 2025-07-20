@@ -3,10 +3,10 @@ import type {TaskInterface} from '@shared/model/types';
 import styles from './taskItem.module.css';
 import EditIcon from '@shared/ui/edit.svg?react';
 import {useNavigate} from 'react-router';
-import {observer} from 'mobx-react-lite';
-import {useTaskStore} from '@/app/taskStore';
-import DeleteIcon from '@shared/ui/delete.svg?react'
-import { format } from "date-fns";
+import DeleteIcon from '@shared/ui/delete.svg?react';
+import {format} from 'date-fns';
+import {getTaskQueryMiddleware} from '@store/taskQueryMiddleware';
+import {modals} from '@mantine/modals';
 
 const PriorityMap = {
     Low: '#8bade8ff',
@@ -33,17 +33,34 @@ const CategoryMap = {
  * @param {TaskInterface} item - Data about task to display in card.
  * @returns {React.Element} A React element displaying card of task.
  */
-export default observer(function TaskItem({item}: {item: TaskInterface}) {
+export default function TaskItem({item}: {item: TaskInterface}) {
     const navigate = useNavigate();
-    const Taskstore: {
-        tasks: TaskInterface[];
-        deleteTask: (id: number) => void;
-    } = useTaskStore();
+    // const Taskstore: {
+    //     tasks: TaskInterface[];
+    //     deleteTask: (id: number) => void;
+    // } = useTaskStore();
+    const {deleteNoteMutation} = getTaskQueryMiddleware();
+    const openDeleteModal = () =>
+        modals.openConfirmModal({
+            title: 'Please confirm your action',
+            children: (
+                <Text size='sm'>
+                    Are you sure you want to delete the task?. This action
+                    cannot be undone.
+                </Text>
+            ),
+            labels: {confirm: 'Delete', cancel: 'Cancel'},
+            confirmProps: { color: 'red' },
+            onCancel: () => console.log('Cancel'),
+            onConfirm: () => deleteNoteMutation(item.id!)
+        });
     function handleDelete(event: any) {
         event.stopPropagation();
-        Taskstore.deleteTask(item.id!);
+        console.log('openModal')
+        openDeleteModal();
+        // Taskstore.deleteTask(item.id!);
     }
-    const dateString = format(new Date(item.date!), "dd MMM yyyy HH:mm")
+    const dateString = format(new Date(item.date!), 'dd MMM yyyy HH:mm');
     return (
         <Paper
             shadow='sm'
@@ -53,7 +70,9 @@ export default observer(function TaskItem({item}: {item: TaskInterface}) {
         >
             {item && (
                 <>
-                <Text className={styles.dateText} ta='left'>{dateString} </Text>
+                    <Text className={styles.dateText} ta='left'>
+                        {dateString}{' '}
+                    </Text>
                     <Group justify='space-between'>
                         <Badge
                             variant='light'
@@ -62,9 +81,9 @@ export default observer(function TaskItem({item}: {item: TaskInterface}) {
                         >
                             {item.priority}
                         </Badge>
-                        <Group gap="0">
+                        <Group gap='0'>
                             <Button
-                                variant="transparent"
+                                variant='transparent'
                                 color='#8c8c8cff'
                                 size='xs'
                                 radius='sm'
@@ -74,14 +93,14 @@ export default observer(function TaskItem({item}: {item: TaskInterface}) {
                                 <EditIcon className={styles.iconEdit} />
                             </Button>
                             <Button
-                                variant="transparent"
+                                variant='transparent'
                                 color='#8c8c8cff'
                                 size='xs'
                                 radius='sm'
                                 onClick={handleDelete}
                                 className={styles.iconButton}
                             >
-                                <DeleteIcon className={styles.iconDelete}/>
+                                <DeleteIcon className={styles.iconDelete} />
                             </Button>
                         </Group>
                     </Group>
@@ -113,4 +132,4 @@ export default observer(function TaskItem({item}: {item: TaskInterface}) {
             )}
         </Paper>
     );
-});
+}

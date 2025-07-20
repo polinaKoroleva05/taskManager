@@ -10,17 +10,16 @@ import {
 } from '@mantine/core';
 import {useForm} from '@mantine/form';
 import styles from './taskDetails.module.css';
-import {observer} from 'mobx-react-lite';
-import { format } from 'date-fns';
+import {format} from 'date-fns';
 
 /**
-     * A functional React component that displays form filled with task data, allows you to edit fields.
-     * @param {TaskInterface} currentTask - The task whose data needs to be displayed.
-     * @param {(taskData: TaskInterface) => void} onSubmitProp - Action to be called when the submit button is pressed.
-     * @param {() => void} onCancelProp - Action to be called when the cancel button is pressed.
-     * @returns {React.Element} A React element displaying the form of task details.
-     */
-export default observer(function TaskDetails({
+ * A functional React component that displays form filled with task data, allows you to edit fields.
+ * @param {TaskInterface} currentTask - The task whose data needs to be displayed.
+ * @param {(taskData: TaskInterface) => void} onSubmitProp - Action to be called when the submit button is pressed.
+ * @param {() => void} onCancelProp - Action to be called when the cancel button is pressed.
+ * @returns {React.Element} A React element displaying the form of task details.
+ */
+export default function TaskDetails({
     currentTask,
     onSubmitProp,
     onCancelProp
@@ -46,7 +45,10 @@ export default observer(function TaskDetails({
                 /\S+/.test(value) ? null : "Title can't be empty"
         }
     });
-    const dateString = format(new Date(currentTask.date!), "dd MMM yyyy HH:mm:ss")
+    const dateString = format(
+        new Date(currentTask.date!),
+        'dd MMM yyyy HH:mm:ss'
+    );
     return (
         <Paper className={styles.form} shadow='md' radius='md'>
             <form onSubmit={form.onSubmit(onSubmitProp)}>
@@ -57,12 +59,14 @@ export default observer(function TaskDetails({
                     {...form.getInputProps('title')}
                 />
                 {currentTask.date && (
-                    <Text fz='sm' fw={500} ta='left'>
-                        Create date
+                    <>
+                        <Text fz='sm' fw={500} ta='left'>
+                            Create date
+                        </Text>
                         <Text fz='sm' ta='left'>
                             {dateString}
                         </Text>
-                    </Text>
+                    </>
                 )}
                 <Textarea
                     label='Description'
@@ -121,4 +125,4 @@ export default observer(function TaskDetails({
             </form>
         </Paper>
     );
-});
+};

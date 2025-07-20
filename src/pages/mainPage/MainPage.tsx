@@ -1,12 +1,19 @@
-import {Button, Flex, Group, Input, Stack, TagsInput} from '@mantine/core';
+import {
+    Button,
+    Flex,
+    Group,
+    Input,
+    Loader,
+    Stack,
+    TagsInput
+} from '@mantine/core';
 import {useState, type JSX} from 'react';
 import type {TaskInterface} from '@shared/model/types';
 import {TaskList} from '@widgets/taskList';
 import {Carousel} from '@mantine/carousel';
 import styles from './mainPage.module.css';
 import SearchIcon from '@shared/ui/search.svg?react';
-import {observer} from 'mobx-react-lite';
-import {useTaskStore} from '@/app/taskStore';
+import {useTasksQuery} from '@/app/taskStore/useTasksQuery';
 import {useNavigate} from 'react-router';
 import {useToggle} from '@mantine/hooks';
 import SortAscIcon from '@shared/ui/sortAsc.svg?react';
@@ -25,8 +32,9 @@ const priorityNumber: {[key: string]: number} = {
     High: 2
 };
 
-export default observer(function MainPage() {
-    const {tasks}: {tasks: TaskInterface[]} = useTaskStore();
+export default function MainPage() {
+    const {data: tasks, isLoading, isSuccess} = useTasksQuery();
+    console.log('tanstack', tasks, isLoading, isSuccess);
     const [searchWord, setSearchWord] = useState('');
     const navigate = useNavigate();
     const [searchCategory, setSearchCategory] = useState<string[] | undefined>(
@@ -46,10 +54,15 @@ export default observer(function MainPage() {
         'desc'
     ]);
 
+
+    if (isLoading) {
+        return <Loader />;
+    }
+
     const regSearch = new RegExp(searchWord, 'i');
 
     let searchFilteredTasks = tasks.filter(
-        (task) =>
+        (task: TaskInterface) =>
             regSearch.test(task.title) ||
             (task.description && regSearch.test(task.description))
     ); //фильтруем по title или, если существует description, то по нему тоже
@@ -61,37 +74,36 @@ export default observer(function MainPage() {
     }
 
     if (searchCategory?.length) {
-        searchFilteredTasks = searchFilteredTasks.filter((task) =>
+        searchFilteredTasks = searchFilteredTasks.filter((task: TaskInterface) =>
             searchCategory.includes(task.category)
         );
     }
     if (searchPriority?.length) {
-        searchFilteredTasks = searchFilteredTasks.filter((task) =>
+        searchFilteredTasks = searchFilteredTasks.filter((task: TaskInterface) =>
             searchPriority.includes(task.priority)
         );
     }
     const tasksToDo = searchFilteredTasks.filter(
-        (task) => task.status === 'To Do'
+        (task: TaskInterface) => task.status === 'To Do'
     );
     const tasksInProgress = searchFilteredTasks.filter(
-        (task) => task.status === 'In Progress'
+        (task: TaskInterface) => task.status === 'In Progress'
     );
     const tasksDone = searchFilteredTasks.filter(
-        (task) => task.status === 'Done'
+        (task: TaskInterface) => task.status === 'Done'
     );
     function handleCreateTask() {
         navigate('/task/new');
     }
 
     function sortDate(a: TaskInterface, b: TaskInterface) {
-        console.log(a.date! - b.date!);
         if (sortOrderDate === 'asc') return a.date! - b.date!;
         return b.date! - a.date!;
     }
 
     function sortPriority(a: TaskInterface, b: TaskInterface) {
-        console.log(priorityNumber[a.priority] - priorityNumber[b.priority])
-        if (sortOrderPriority === 'asc') return priorityNumber[a.priority] - priorityNumber[b.priority];
+        if (sortOrderPriority === 'asc')
+            return priorityNumber[a.priority] - priorityNumber[b.priority];
         return priorityNumber[b.priority] - priorityNumber[a.priority];
     }
 
@@ -217,4 +229,4 @@ export default observer(function MainPage() {
             </Carousel>
         </>
     );
-});
+};

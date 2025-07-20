@@ -1,4 +1,4 @@
-import { useTaskStore } from '@/app/taskStore';
+import { getTaskQueryMiddleware } from '@store/taskQueryMiddleware';
 import type {TaskInterface} from '@/shared/model/types';
 import {TaskDetails} from '@/widgets/taskDetails';
 import {useNavigate} from 'react-router';
@@ -14,13 +14,9 @@ export default function NewTaskPage() {
         priority: 'Low',
         date: null
     };
-    const Taskstore: {
-        tasks: TaskInterface[];
-        createTask: (task: TaskInterface) => void;
-    } = useTaskStore();
-
+    const {createTaskMutation} = getTaskQueryMiddleware()
     function handleCreateTask(taskData: TaskInterface) {
-        Taskstore.createTask(taskData)
+        createTaskMutation(taskData)
         navigate('/')
     }
     return (
