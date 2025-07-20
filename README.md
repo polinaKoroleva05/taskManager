@@ -2,7 +2,7 @@
 
 Веб-приложение "Менеджер задач", позволяющее просматривать список задач и редактировать их. 
 ![Главная страница](https://github.com/polinaKoroleva05/taskManager/blob/main/public/mainPage.png)
-![Страница редактирования задачи](https://github.com/polinaKoroleva05/taskManager/blob/main/public/editPage.png)
+<img src="https://github.com/polinaKoroleva05/taskManager/blob/main/public/editPage.png" width="600">
 Пользователь может переключиться на темную тему:
 ![Главная страница](https://github.com/polinaKoroleva05/taskManager/blob/main/public/mainPageDark.png)
 Для ознакомления проект доступен по ссылке:
