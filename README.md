@@ -24,7 +24,9 @@
 ![Главная страница в темной теме](https://github.com/polinaKoroleva05/taskManager/blob/main/public/mainPageDark.png)
 
 ### Адаптивный дизайн:
-![Интерфейс на мобильном устройстве](https://github.com/polinaKoroleva05/taskManager/blob/main/public/mobileInterface.png)
+<p align="center">
+    <img alt="Интерфейс на мобильном устройстве" src="https://github.com/polinaKoroleva05/taskManager/blob/main/public/mobileInterface.png" width="600">
+</p>
 
 ### Установка:
 <ins>Установка для дальнейшей разработки:</ins>
