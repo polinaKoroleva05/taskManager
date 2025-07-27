@@ -21,7 +21,10 @@
 ![Страница редактирования](https://github.com/polinaKoroleva05/taskManager/blob/main/public/editPage.png)
 
 ### Доступно переключение на темную тему:
-![Главная страница](https://github.com/polinaKoroleva05/taskManager/blob/main/public/mainPageDark.png)
+![Главная страница в темной теме](https://github.com/polinaKoroleva05/taskManager/blob/main/public/mainPageDark.png)
+
+### Адаптивный дизайн:
+![Интерфейс на мобильном устройстве](https://github.com/polinaKoroleva05/taskManager/blob/main/public/mobileInterface.png)
 
 ### Установка:
 <ins>Установка для дальнейшей разработки:</ins>
